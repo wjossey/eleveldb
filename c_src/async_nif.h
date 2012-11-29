@@ -180,7 +180,7 @@ static void *async_nif_worker_fn(void *arg)
   return 0;
 }
 
-static int async_nif_size_thread_pool(int amt)
+static int async_nif_size_thread_pool(unsigned int amt)
 {
   int i;
 
