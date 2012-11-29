@@ -180,17 +180,17 @@ static void *async_nif_worker_fn(void *arg)
   return 0;
 }
 
-static int async_nif_size_thread_pool(unsigned int amt)
+static int async_nif_size_thread_pool(int amt)
 {
   int i;
-
+  
   /* Setup the thread pool management. */
   enif_mutex_lock(async_nif_worker_mutex);
   if (amt == 0) {
     enif_mutex_unlock(async_nif_worker_mutex);
     return 0;
   } else if (amt < 0) {
-    if (abs(amt) != async_nif_worker_count) {
+    if (((unsigned int) abs(amt)) != async_nif_worker_count) {
       /* TODO: Someday add code to shrink the number of worker threads, ...
          but not today. */
       enif_mutex_unlock(async_nif_worker_mutex);
